@@ -2,7 +2,7 @@
 
 ## This sheet contains implementation of solutions of all problems of the excel sheet attached below
 
-Implementaion is in **C++** 
+Implementaions is in **C++** 
 
 [LINK FOR THE SHEET](https://docs.google.com/spreadsheets/d/1lPKeey7kyKeSZgrmREUDGsug28Xj-GGx321wLGLvBZA/edit?usp=sharing)
 
