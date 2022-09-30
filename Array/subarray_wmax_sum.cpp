@@ -3,7 +3,7 @@
  *
  *       Filename:  subarray_wmax_sum.cpp
  *
- *    Description:  find the subarray with maximum sum  
+ *    Description:  find the subarray with maximum sum  { kadane'salgorithm}
  *
  *        Version:  1.0
  *        Created:  30/09/22 09:30:24 AM IST
@@ -18,12 +18,13 @@
 
 #include<iostream>
 #include<vector>
- 
+ #include<climits>
+
 //_____secondary__functions______//
 
 int max_sub(std::vector<int> &arr)
 {
-    int max_so_far = 0, max_ending_here = 0;
+    int max_so_far = INT_MIN, max_ending_here = 0;    ///   very important - INT_MAX and INT_MIN
  
     for (int i = 0; i < arr.size(); i++) {
         max_ending_here = max_ending_here + arr[i];
@@ -52,6 +53,10 @@ int main()
     arr.push_back(1);
     arr.push_back(-5);
     arr.push_back(4);
+
+    // arr.push_back(-2);
+    // arr.push_back(-1);
+    // arr.push_back(-3);
 
     int res =max_sub(arr);
 
