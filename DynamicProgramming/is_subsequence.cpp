@@ -25,9 +25,54 @@
 
 int is_substring(std::string s, std::string t)
 {
-
-
-
+    
+    int lens = s.length();
+    int lent = t.length();
+    
+    int index_t =0;
+    
+    if(lens > lent)
+    {
+        return false;
+    }
+    
+    if(lens == 0)
+    {
+        return true;
+    }
+    
+    
+    for(int i=0; i<lens; i++)
+    {
+        int j=index_t; 
+        
+        while(s[i] != t[j] && j<lent)
+        {
+                j++;
+        }
+        
+        
+        if(j == lent)
+        {
+            return false;
+        }
+        
+        if(s[i] == t[j])
+        {
+            index_t = j;
+        }
+        
+        index_t++;
+        
+        if(i == (lens-1))
+        {
+            return true;
+        }
+        
+    }
+    
+    return false;
+    
 }
  
  
