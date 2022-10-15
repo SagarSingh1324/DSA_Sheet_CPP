@@ -4,417 +4,99 @@
  
 //_____secondary__functions______//
  
-bool can_A_win(std::vector<int> &nums)
+bool isSortedNonDecreasing(int* begin, int* end)
 {
+    bool temp = std::is_sorted(begin, end);
+    return temp;
+}
 
-    int A_score = 0;
-    int B_score = 0;
+bool isSortedNonIncreasing(int* begin, int* end)
+{
+    int *ptr = begin;
 
-    int A_turn = 1;
-    int B_turn = -1;
-
-    while(nums.size() != 0)
+    while(ptr != end)
     {
-
-        if(A_turn == 1)
+        if(*(ptr+1) > *ptr)
         {
-            if(nums.size() >= 4)
-            {
-                if( std::max(nums[1], nums[nums.size()-2]) > std::max(nums[0], nums[nums.size()-1]) )
-                {
-                    if(nums[1] > nums[nums.size()-2])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.end()-1);
-                        A_score = A_score + *it;
-                        nums.erase(it);
-                    }
-                    else if(nums[1] < nums[nums.size()-2])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.begin());
-                        A_score = A_score + *it;
-                        nums.erase(it);                        
-                    }
-                    else if(nums[1] == nums[nums.size()-2])
-                    {
-                        if(nums[0] >= nums[nums.size()-1])
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.begin());
-                            A_score = A_score + *it;
-                            nums.erase(it);                               
-                        }
-                        else
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.end()-1);
-                            A_score = A_score + *it;
-                            nums.erase(it);   
-                        }
-                    }
-                }
-                else if( std::max(nums[1], nums[nums.size()-2]) < std::max(nums[0], nums[nums.size()-1]) )
-                {
-
-                    if(nums[0] < nums[nums.size()-1])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.end()-1);
-                        A_score = A_score + *it;
-                        nums.erase(it);
-                    }
-                    else if(nums[0] > nums[nums.size()-1])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.begin());
-                        A_score = A_score + *it;
-                        nums.erase(it);                        
-                    }
-                    else if(nums[0] == nums[nums.size()-1])
-                    {
-                        if(nums[1] >= nums[nums.size()-2])
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.end()-1);
-                            A_score = A_score + *it;
-                            nums.erase(it);                               
-                        }
-                        else
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.begin());
-                            A_score = A_score + *it;
-                            nums.erase(it);   
-                        }
-                    }
-                    
-                }
-                else if( std::max(nums[1], nums[nums.size()-2]) == std::max(nums[0], nums[nums.size()-1]) )
-                {
-                    if( (nums[0] >= nums[nums.size()-1]) ) //&& (nums[1] >= nums[nums.size()-2]) )
-                    {
-
-                            std::vector<int>::iterator it;
-                            it = (nums.begin());
-                            B_score = B_score + *it;
-                            nums.erase(it);
-
-                        // if(nums[nums.size()-1] >= nums[nums.size()-2])
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.end()-1);
-                        //     A_score = A_score + *it;
-                        //     nums.erase(it);
-                        // }
-                        // else
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.begin());
-                        //     A_score = A_score + *it;
-                        //     nums.erase(it);
-                        // }
-                    }
-                    else if ( (nums[0] <= nums[nums.size()-1]) ) //&& (nums[1] <= nums[nums.size()-2]) )
-                    {
-
-                            std::vector<int>::iterator it;
-                            it = (nums.end()-1);
-                            B_score = B_score + *it;
-                            nums.erase(it);
-
-                        // if(nums[0] >= nums[1])
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.begin());
-                        //     A_score = A_score + *it;
-                        //     nums.erase(it);
-                        // }
-                        // else
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.end()-1);
-                        //     A_score = A_score + *it;
-                        //     nums.erase(it);
-                        // }
-                    }
-                    // else if( (nums[0] >= nums[nums.size()-1]) && (nums[1] <= nums[nums.size()-2]) )
-                    // {
-                    //     if(nums[nums.size()-1] >= nums[1])
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.end()-1);
-                    //         A_score = A_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    //     else
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.begin());
-                    //         A_score = A_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    // }
-                    // else if( (nums[0] <= nums[nums.size()-1]) && (nums[1] >= nums[nums.size()-2]) )
-                    // {
-                    //     if(nums[0] >= nums[nums.size()-2])
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.begin());
-                    //         A_score = A_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    //     else
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.end()-1);
-                    //         A_score = A_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    // }
-                }
-            }
-            else if(nums.size()<=3 && nums.size() >=2)
-            {
-                if(nums[0] >= nums[nums.size()-1])
-                {
-                    std::vector<int>::iterator it;
-                    it = nums.begin();
-                    A_score = A_score + *it;
-                    nums.erase(it);
-                }
-                else 
-                {
-                    std::vector<int>::iterator it;
-                    it = (nums.end()-1);
-                    A_score = A_score + *it;
-                    nums.erase(it);
-                }
-            }
-            else
-            {
-
-                std::vector<int>::iterator it;
-                it = nums.begin();
-                A_score = A_score + *it;
-                nums.erase(it);
-
-            }
-
-            A_turn = A_turn*(-1);
-            B_turn = B_turn*(-1);
-
-        }  /////////////////-----------------------------------------------------////////////////////////----------------------------------/////////////////////---------------------------//////////////// 
-        else if(B_turn == 1)
-        {
-            if(nums.size() >= 4)
-            {
-                if( std::max(nums[1], nums[nums.size()-2]) > std::max(nums[0], nums[nums.size()-1]) )
-                {
-                    if(nums[1] > nums[nums.size()-2])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.end()-1);
-                        B_score = B_score + *it;
-                        nums.erase(it);
-                    }
-                    else if(nums[1] < nums[nums.size()-2])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.begin());
-                        B_score = B_score + *it;
-                        nums.erase(it);                        
-                    }
-                    else if(nums[1] == nums[nums.size()-2])
-                    {
-                        if(nums[0] >= nums[nums.size()-1])
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.begin());
-                            B_score = B_score + *it;
-                            nums.erase(it);                               
-                        }
-                        else
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.end()-1);
-                            B_score = B_score + *it;
-                            nums.erase(it);   
-                        }
-                    }
-                }
-                else if( std::max(nums[1], nums[nums.size()-2]) < std::max(nums[0], nums[nums.size()-1]) )
-                {
-
-                    if(nums[0] > nums[nums.size()-1])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.begin());
-                        B_score = B_score + *it;
-                        nums.erase(it);
-                    }
-                    else if(nums[0] < nums[nums.size()-1])
-                    {
-                        std::vector<int>::iterator it;
-                        it = (nums.end()-1);
-                        B_score = B_score + *it;
-                        nums.erase(it);                        
-                    }
-                    else if(nums[0] == nums[nums.size()-1])
-                    {
-                        if(nums[1] >= nums[nums.size()-2])
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.end()-1);
-                            B_score = B_score + *it;
-                            nums.erase(it);                               
-                        }
-                        else
-                        {
-                            std::vector<int>::iterator it;
-                            it = (nums.begin());
-                            B_score = B_score + *it;
-                            nums.erase(it);   
-                        }
-                    }
-                    
-                }
-                else if( std::max(nums[1], nums[nums.size()-2]) == std::max(nums[0], nums[nums.size()-1]) )
-                {
-                    if( (nums[0] >= nums[nums.size()-1]) ) //&& (nums[1] >= nums[nums.size()-2]) )
-                    {
-
-                        std::vector<int>::iterator it;
-                        it = (nums.begin());
-                        B_score = B_score + *it;
-                        nums.erase(it);
-
-                        // if(nums[nums.size()-1] >= nums[nums.size()-2])
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.end()-1);
-                        //     B_score = B_score + *it;
-                        //     nums.erase(it);
-                        // }
-                        // else
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.begin());
-                        //     B_score = B_score + *it;
-                        //     nums.erase(it);
-                        // }
-                    }
-                    else if ( (nums[0] <= nums[nums.size()-1]) ) // && (nums[1] <= nums[nums.size()-2]) )
-                    {
-
-                            std::vector<int>::iterator it;
-                            it = (nums.end()-1);
-                            B_score = B_score + *it;
-                            nums.erase(it);
-
-                        // if(nums[0] >= nums[1])
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.begin());
-                        //     B_score = B_score + *it;
-                        //     nums.erase(it);
-                        // }
-                        // else
-                        // {
-                        //     std::vector<int>::iterator it;
-                        //     it = (nums.end()-1);
-                        //     B_score = B_score + *it;
-                        //     nums.erase(it);
-                        // }
-                    }
-                    // else if( (nums[0] >= nums[nums.size()-1]) && (nums[1] <= nums[nums.size()-2]) )
-                    // {
-                    //     if(nums[nums.size()-1] >= nums[1])
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.end()-1);
-                    //         B_score = B_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    //     else
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.begin());
-                    //         B_score = B_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    // }
-                    // else if( (nums[0] <= nums[nums.size()-1]) && (nums[1] >= nums[nums.size()-2]) )
-                    // {
-                    //     if(nums[0] >= nums[nums.size()-2])
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.begin());
-                    //         B_score = B_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    //     else
-                    //     {
-                    //         std::vector<int>::iterator it;
-                    //         it = (nums.end()-1);
-                    //         B_score = B_score + *it;
-                    //         nums.erase(it);
-                    //     }
-                    // }
-                }
-            }
-            else if(nums.size()<=3 && nums.size() >=2)
-            {
-                if(nums[0] >= nums[nums.size()-1])
-                {
-                    std::vector<int>::iterator it;
-                    it = nums.begin();
-                    B_score = B_score + *it;
-                    nums.erase(it);
-                }
-                else 
-                {
-                    std::vector<int>::iterator it;
-                    it = (nums.end()-1);
-                    B_score = B_score + *it;
-                    nums.erase(it);
-                }
-            }
-            else
-            {
-
-                std::vector<int>::iterator it;
-                it = nums.begin();
-                B_score = B_score + *it;
-                nums.erase(it);
-
-            }
-
-            A_turn = A_turn*(-1);
-            B_turn = B_turn*(-1);
-
+            return false;
         }
 
+        ptr++;
     }
 
-    if(A_score >= B_score)
-    {
-        return true;
-    }
-
-    return false;
-
+    return true;
 }
- 
+
+std::vector<int> goodDaysToRobBank(std::vector<int>& security, int time) 
+{
+    std::vector<int> result;
+
+    if(time == 0)
+    {
+        for (int i = 0; i < security.size(); i++)
+        {
+            result.push_back(i);
+        }
+
+        return result;
+        
+    }
+    
+    if(time >= security.size())
+    {
+        return result;
+    }
+
+    
+    for(int i = time; i<(security.size()-time); i++)
+    {
+        if( isSortedNonIncreasing( &security[i-time], &security[i] ) && isSortedNonDecreasing( &security[i], &security[i+time+1] ) )
+        {
+            result.push_back(i);
+        }
+    }
+            
+    return result;
+    
+}
  
 //______main__function_____//
  
 int main()
 {
 
-    std::vector<int> nums = {1000,999,999,1000,555,400};
+// Input: security = [5,3,3,3,5,6,2], time = 2
+// Output: [2,3]
 
-    std::cout<<can_A_win(nums)<<std::endl;
- 
-    return 0; 
+std::vector<int> security;
+
+// [1,2,5,4,1,0,2,4,5,3,1,2,4,3,2,4,8]
+
+
+
+security.push_back(1);
+security.push_back(2);
+security.push_back(5);
+security.push_back(4);
+security.push_back(1);
+security.push_back(0);
+security.push_back(2);
+security.push_back(4);
+security.push_back(5);
+security.push_back(3);
+security.push_back(1);
+security.push_back(2);
+security.push_back(4);
+security.push_back(3);
+security.push_back(2);
+security.push_back(4);
+security.push_back(8);
+// security.push_back(6);
+// security.push_back(2);
+
+std::vector<int> result = goodDaysToRobBank(security, 2);
+
+std::cout<<result[2]<<std::endl;
+
+ return 0; 
 }
